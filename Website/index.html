@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8" />
+
+  </head>
+  <style>
+
+    body{
+      margin:0px;
+
+    }
+    .header{
+
+        padding: 30px;
+        text-align: center;
+        color: rgb(255, 255, 255);
+        font-size: 30px;
+        font-family: "Lato-Regular", Helvetica;
+        background-color: #0054a6;
+        font-weight: 900 ;
+    }
+    .logo{
+        float:left;
+        font-size: 30px;
+        color: rgb(158, 158, 157);
+    }
+
+    a{
+      text-decoration: none;
+      color: white;
+    }
+
+    a:visited{
+      text-decoration: none;
+      color: none;
+
+    }
+
+    .Login-Register{
+        float:right;
+        font-size: 30px;
+        color: rgb(158, 158, 157);
+    }
+
+    .grid {
+      font-family: Helvetica;;
+    display: flex;
+    justify-content:space-evenly; /* spreads items evenly */
+    align-items: start;
+    max-width: 1200px;                /* keeps the grid centered */
+    margin: 0 auto;
+    padding:30px;
+    box-sizing: border-box;
+    gap: 40px; /* optional: consistent spacing between items */
+}
+
+.grid-item {
+    flex: 1;                  /* each item takes equal space */
+    min-width: 0;             /* prevents overflow */
+    min-height:220px;
+    box-sizing: border-box;
+    padding: 15px;
+    /*background-color: #f5f5f5;  optional: for visibility */
+}
+
+  .reviews-section .grid-item{
+    flex:1;
+    font-family: "Helvetica";
+    background-color: #f5f5f5;
+    border-radius:15px;
+    padding:25px;
+    font-size:18px;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+
+  .reviews-section .grid-item > p:first-child{
+    font-size:20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+
+    /*.grid {
+    margin: 0 auto;
+    width: 960px;
+    padding-left: 30px;
+    padding-right: 30px;
+    }
+    .grid,
+    .grid-item,
+    .col-2-3 {
+    padding-left: 15px;
+    padding-right: 15px;
+    }
+    .grid-item,
+    .col-2-3  {
+    display: inline-block;
+    vertical-align: top;
+    }
+    .grid-item {
+    width: 33.33%;
+    }
+    .col-2-3 {
+    width: 66.66%;
+    }*/
+
+.Title{
+
+padding:30px;
+
+}
+
+.Title h2{
+  font-family:"Lato-Regular","Helvetica";
+  font-size: 30px;
+  font-weight: bold;
+  border-bottom: 10px solid #fce188;
+  display: inline-block;
+  padding-bottom: 5px;
+
+}
+
+.Host-Section{
+
+padding:10px;
+
+}
+
+.host-box{
+
+background-color: #e6f0ff;
+border-radius: 20px;
+padding: 40px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+width:90%;
+min-height: 180px;
+
+}
+
+.host-box p{
+  font-size:22px;
+  margin:0;
+
+}
+
+.Host-Button{
+ background-color:#0054a6;
+ color:white;
+ padding: 15px 30px;
+ font-size: 18px;
+ border:none;
+ border-radius: 20px;
+ cursor: pointer;
+
+}
+
+.Host-Button:hover{
+  background-color: #fce188;
+}
+
+.box {
+  width: 100%;
+  /*height: 254px;*/
+  max-width:100%;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.box .footer {
+  width:100%;
+  height: 254px;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  aspect-ratio: 5.68;
+}
+
+.box .overlap-group {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  height: 254px;
+  background-color: #000000;
+  margin: 0 auto;
+}
+
+.box .text-wrapper {
+  position: absolute;
+  width: 379px;
+  top: 77px;
+  left: 1017px;
+  font-family: "Lato-Regular", Helvetica;
+  font-weight: 400;
+  color: #ffffff;
+  font-size: 30px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.box .div {
+  position: absolute;
+  width: 461px;
+  top: 212px;
+  left: 556px;
+  font-family: "Lato-Regular", Helvetica;
+  font-weight: 400;
+  color: #ffffff;
+  font-size: 20px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.box .ellipse {
+  left: 1017px;
+  position: absolute;
+  width: 42px;
+  height: 45px;
+  top: 154px;
+  background-color: #d9d9d9;
+  border-radius: 20.98px / 22.27px;
+}
+
+.box .ellipse-2 {
+  left: 1102px;
+  position: absolute;
+  width: 42px;
+  height: 45px;
+  top: 154px;
+  background-color: #d9d9d9;
+  border-radius: 20.98px / 22.27px;
+}
+
+.box .ellipse-3 {
+  left: 1186px;
+  position: absolute;
+  width: 42px;
+  height: 45px;
+  top: 154px;
+  background-color: #d9d9d9;
+  border-radius: 20.98px / 22.27px;
+}
+
+.box .ellipse-4 {
+  left: 1270px;
+  position: absolute;
+  width: 42px;
+  height: 45px;
+  top: 154px;
+  background-color: #d9d9d9;
+  border-radius: 20.98px / 22.27px;
+}
+
+.box .text-wrapper-2 {
+  position: absolute;
+  width: 254px;
+  top: 30px;
+  left: 1017px;
+  font-family: "Inter-Bold", Helvetica;
+  font-weight: 700;
+  color: #ffffff;
+  font-size: 30px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.box .text-wrapper-3 {
+  position: absolute;
+  width: 207px;
+  top: 96px;
+  left: 132px;
+  font-family: "Inter-ExtraBold", Helvetica;
+  font-weight: 800;
+  color: #ffffff;
+  font-size: 30px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.dot {
+  height: 30px;
+  width: 30px;
+  background-color: #bbb;
+  border-radius: 50%;
+  flex-shrink: 0;
+  /*display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;*/
+}
+
+.dot-text{
+  display: flex;
+  align-items: center;
+  gap:10px;
+  font-size:16px;
+}
+
+  </style>
+  <body>
+    <div class ="header">
+        <div class = "logo"><a href="index.html">
+          <img src="logo.jpg" alt="cput logo" style="height: 50px; margin-right: 10px; vertical-align: middle;">
+          CPUT STAYS</a></div>
+        <div class ="Login-Register">
+            <a href="login.php">LOGIN</a>
+            <a href="register.html">REGISTER</a>
+        </div>
+        <div class = "header-text">
+            <p>MAKING</p>
+            <p>LIFE EASIER</p>
+        </div>
+        
+    </div>
+        <section class ="grid">
+            <!--Comment too get grid inline-->
+            <section class ="grid-item">
+                <h2 style="font-size: 30px; font-weight: bolder;">WHY US?</h2>
+                <p>We connect CPUT students with safe, affordable, and convenient housing options. Every listing is verified to give you peace of mind.</p>
+            </section><!--
+
+            --><section class ="grid-item">
+                <h2 style="font-size: 30px; font-weight: bolder;">TRUSTED LISTINGS</h2>
+                <p>All our properties are vetted to ensure they meet student needs, from reliable landlords to proximity to campus facilities.</p>
+            </section><!--
+
+
+            --><section class ="grid-item">
+                <h2 style="font-size: 30px; font-weight: bolder;">EASY TO USE</h2>
+                <p>Our platform is designed with students in mind — quick searches, clear details, and a smooth booking process.</p>
+            </section><!--
+            
+        --></section>
+        <div>
+          <div class = "Title"><h2 style="font-size: 30px; font-weight: bolder;">REVIEWS</h2></div>
+          <section class = "grid reviews-section">   
+              <section class="grid-item">
+                <p>John Doe</p>
+                <div class = "dot-text">
+                  <span class = "dot"></span>
+                  <p>“The platform gave me verified options, and the landlord was great.”</p>
+                </div>
+              </section> 
+              <section class="grid-item">
+                <p>John Doe</p>
+                <div class = "dot-text">
+                  <span class = "dot"></span>
+                  <p>“Finding a place near campus was so easy. I moved in stress-free!”</p>
+                </div>
+              </section>  
+              <section class="grid-item">
+                <p>John Doe</p>
+                <div class = "dot-text">
+                  <span class = "dot"></span>
+                  <p>"Student Living Simplified"</p>
+                </div>
+              </section> 
+              <!--<section class="grid-item">
+                  <p>John Doe</p>  how it was before
+                  <p>Lorem ipsum dolor sit amet</p>
+              </section>-->
+            
+          </section>
+        </div>
+        <div>
+        <div class = "Title">
+          <h2>BECOME A HOST</h2>
+        </div> 
+            <div class = "Host-Section">
+              <div class="host-box">
+                <p style="font-family:Helvetica;font-weight: bolder; text-transform:uppercase ;">Have a property near CPUT? List it today!</p>
+           <a href="register_staff.html"> <button class = "Host-Button">Become a Host</button></a>
+          </div>
+        </div>
+        </div>
+
+    <div class="box">
+      <footer class="footer">
+        <div class="overlap-group">
+          <p class="text-wrapper">Find us on these platforms</p>
+          <p class="div">© 2025 All Right Reserved</p>
+          <div class="ellipse"></div>
+          <div class="ellipse-2"></div>
+          <div class="ellipse-3"></div>
+          <div class="ellipse-4"></div>
+          <div class="text-wrapper-2">Follow Us</div>
+          <div class="text-wrapper-3"><img src="logo.jpg" alt="cput logo" style="height: 100px; margin-right: 10px; vertical-align: middle;"></div>
+        </div>
+        </footer>
+    </div>
+  </body>
+</html>

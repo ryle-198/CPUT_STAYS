@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Payment Summary</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <div class="logo">
+	<a href="homepage.html" style="text-decoration: none; color: white;">
+	<img src="logo.jpg" alt="cput logo" style="height: 40px; margin-right: 10px; vertical-align: middle;">
+	CPUT STAYS
+	</a>
+	</div>
+    <nav>
+      <a href="profile.php">Profile</a>
+    </nav>
+  </header>
+  <main class="form-container">
+    <h2>Payment Summary</h2>
+    <div class="summary-section">
+      <h3>Payment Details</h3>
+      <div class="summary-item">
+        <span class="label">Payment Method:</span>
+        <span class="value">Credit Card</span>
+      </div>
+      <div class="summary-item">
+        <span class="label">Email:</span>
+        <span class="value">student@example.com</span>
+      </div>
+      <div class="summary-item">
+        <span class="label">Card Number:</span>
+        <span class="value">**** **** **** 1234</span>
+      </div>
+      <div class="summary-item">
+        <span class="label">Payment Date:</span>
+        <span class="value">2025-08-19</span>
+      </div>
+      <div class="summary-item">
+        <span class="label">Amount:</span>
+        <span class="value">R3,000.00</span>
+      </div>
+    </div>
+
+    <div class="summary-section">
+      <h3>Billing Information</h3>
+      <div class="summary-item">
+        <span class="label">Billing Address:</span>
+        <span class="value">123 Main Street</span>
+      </div>
+      <div class="summary-item">
+        <span class="label">City:</span>
+        <span class="value">Cape Town</span>
+      </div>
+      <div class="summary-item">
+        <span class="label">ZIP Code:</span>
+        <span class="value">8001</span>
+      </div>
+    </div>
+
+    <!--div class="summary-section">
+      <h3>Transaction Status</h3>
+      <div class="status-success">
+        <strong>Payment Successful!</strong>
+        <p>Your payment has been processed successfully. Transaction ID: TXN-2025081901234</p>
+      </div>
+    </div-->
+  </main>
+  <footer>
+    <p>© 2025 CPUT STAYS. All rights reserved.</p>
+  </footer>
+
+  <style>
+    .summary-section {
+      margin-bottom: 2em;
+      padding: 1.5em;
+      background-color: #f8f9fa;
+      border-radius: 8px;
+      border-left: 4px solid #0054a6;
+    }
+    
+    .summary-section h3 {
+      color: #0054a6;
+      margin-bottom: 1em;
+      font-size: 1.2em;
+    }
+    
+    .summary-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.8em;
+      padding: 0.5em 0;
+      border-bottom: 1px solid #e9ecef;
+    }
+    
+    .summary-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+    
+    .label {
+      font-weight: 600;
+      color: #495057;
+    }
+    
+    .value {
+      color: #212529;
+      font-weight: 500;
+    }
+    
+    .status-success {
+      background-color: #d4edda;
+      border: 1px solid #c3e6cb;
+      color: #155724;
+      padding: 1em;
+      border-radius: 5px;
+      text-align: center;
+    }
+    
+    .status-success strong {
+      display: block;
+      font-size: 1.1em;
+      margin-bottom: 0.5em;
+    }
+    
+    .action-buttons {
+      display: flex;
+      gap: 1em;
+      justify-content: center;
+      margin-top: 2em;
+      flex-wrap: wrap;
+    }
+    
+    .primary-btn, .secondary-btn {
+      padding: 0.8em 1.5em;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    
+    .primary-btn {
+      background-color: #0054a6;
+      color: white;
+    }
+    
+    .primary-btn:hover {
+      background-color: #003e80;
+    }
+    
+    .secondary-btn {
+      background-color: #6c757d;
+      color: white;
+    }
+    
+    .secondary-btn:hover {
+      background-color: #545b62;
+    }
+  </style>
+</body>
+</html>

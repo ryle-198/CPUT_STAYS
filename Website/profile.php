@@ -1,0 +1,88 @@
+<?php
+session_start();
+
+if (isset($_SESSION["user_id"])) {
+    $mysqli = require __DIR__ . "/database.php";
+    
+    // Fetch student info
+    $sql = "SELECT * FROM student WHERE ID_NUM = ?";
+    $stmt = $mysqli->prepare($sql);
+    $stmt->bind_param("i", $_SESSION["user_id"]);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $user = $result->fetch_assoc();
+    $stmt->close();
+
+    // Fetch bookings for this student
+    if ($user) {
+        $sql = "SELECT * FROM booking WHERE StudNum = ?";
+        $stmt = $mysqli->prepare($sql);
+        $stmt->bind_param("s", $user["STUD_NUMBER"]);
+        $stmt->execute();
+        $bookings = $stmt->get_result();
+        $stmt->close();
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Student Profile</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<style>
+button{
+    background-color: #0054a6;
+    color: white;
+    padding: 15px 30px;
+    font-size: 18px;
+    /*margin: 10px 5px 40px 0px;*/
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+p{
+  margin-bottom:10px;
+  font-size:20px;
+
+}
+</style>
+
+<body>
+  <header>
+    <div class="logo"><a href="homepage.html" style="text-decoration: none; color: white;">
+      <img src="logo.jpg" alt="cput logo" style="height: 40px; margin-right: 10px; vertical-align: middle;">
+    CPUT STAYS </a></div>
+    <nav>
+      <a href="homepage.html">Home</a>
+      <a href="booking.html">Booking</a>
+      <a href="payment.html">Payment</a>
+    </nav>
+  </header>
+    <main class="form-container">
+      <?php if (isset($user)): ?>
+        <h1>Welcome, <?= htmlspecialchars($user["FIRST_NAME"])?></h1>
+        <section>
+          <h2>Your Info</h2>
+          <p><strong>ID NUMBER:</strong><?= htmlspecialchars($user["ID_NUM"])?></p>
+          <p><strong>First Name:</strong><?= htmlspecialchars($user["FIRST_NAME"])?></p>
+          <p><strong>Last Name:</strong><?= htmlspecialchars($user["LAST_NAME"])?></p>
+          <p><strong>Student Number:</strong><?= htmlspecialchars($user["STUD_NUMBER"])?></p>
+          <p><strong>Email:</strong><?= htmlspecialchars($user["EMAIL"])?></p>
+          <p><strong>Cell:</strong> <?=htmlspecialchars($user["CELL_NUMBER"])?> </p>
+          <p><strong>Enrollment Year:</strong><?= htmlspecialchars($user["ENROLLMENT_YEAR"])?></p>
+        </section>
+        <div><a href ="booking-summary.php">View Your Bookings</a></div>
+        <div><a href ="payment-summary.html">View Your Payments</a></div>
+        <a href = "logout.php"><button>Logout</button></a>
+  </main>
+  <footer>
+    <p>© 2025 CPUT STAYS. All rights reserved.</p>
+  </footer>
+  <?php else: ?>
+  <?php endif; ?>
+</body>
+</html>

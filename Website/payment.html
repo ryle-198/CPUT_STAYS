@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Payment</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <div class="logo">
+	<a href="homepage.html" style="text-decoration: none; color: white;">
+	<img src="logo.jpg" alt="cput logo" style="height: 40px; margin-right: 10px; vertical-align: middle;">
+	CPUT STAYS
+	</a>
+	</div>
+    <nav>
+      <!--a href="index.html">Home</a-->
+      <a href="profile.php">Profile</a>
+    </nav>
+  </header>
+
+  <main class="form-container">
+    <h2>Make Payment</h2>
+    <form action="payment.html" method="post">
+      <label>Payment Method</label>
+      <select>
+        <option>Credit Card</option>
+        <option>Bank Transfer</option>
+      </select>
+	  <label>Email Address</label>
+	  <input type="email" required>
+	  <label>Card Number</label>
+	  <input type="text" maxlength="16" required>
+	  <label>Expiry Date</label>
+	  <input type="text" placeholder="MM/YY" required>
+	  <label>CVV</label>
+	  <input type="text" maxlength="3" required>
+	  <label>Billing Address</label>
+	  <input type="text" required>
+	  <label>City</label>
+	  <input type="text" required>
+	  <label>ZIP Code</label>
+	  <input type="text" required>
+      <label>Payment Date</label>
+      <input type="date" required />
+      <label>Amount</label>
+      <input type="number" placeholder="e.g., 3000" required />
+      <button type="submit">Confirm Payment</button>
+    </form>
+  </main>
+  <footer>
+    <p>© 2025 CPUT STAYS. All rights reserved.</p>
+  </footer>
+</body>
+</html>
