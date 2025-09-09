@@ -30,27 +30,8 @@ if (isset($_SESSION["user_id"])) {
 <head>
   <meta charset="UTF-8" />
   <title>Student Profile</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css"/>
 </head>
-<style>
-button{
-    background-color: #0054a6;
-    color: white;
-    padding: 15px 30px;
-    font-size: 18px;
-    /*margin: 10px 5px 40px 0px;*/
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
-}
-
-p{
-  margin-bottom:10px;
-  font-size:20px;
-
-}
-</style>
-
 <body>
   <header>
     <div class="logo"><a href="homepage.html" style="text-decoration: none; color: white;">
@@ -67,17 +48,17 @@ p{
         <h1>Welcome, <?= htmlspecialchars($user["FIRST_NAME"])?></h1>
         <section>
           <h2>Your Info</h2>
-          <p><strong>ID NUMBER:</strong><?= htmlspecialchars($user["ID_NUM"])?></p>
-          <p><strong>First Name:</strong><?= htmlspecialchars($user["FIRST_NAME"])?></p>
-          <p><strong>Last Name:</strong><?= htmlspecialchars($user["LAST_NAME"])?></p>
-          <p><strong>Student Number:</strong><?= htmlspecialchars($user["STUD_NUMBER"])?></p>
-          <p><strong>Email:</strong><?= htmlspecialchars($user["EMAIL"])?></p>
-          <p><strong>Cell:</strong> <?=htmlspecialchars($user["CELL_NUMBER"])?> </p>
-          <p><strong>Enrollment Year:</strong><?= htmlspecialchars($user["ENROLLMENT_YEAR"])?></p>
+          <p class = "user-info"><strong>ID NUMBER:</strong><?= htmlspecialchars($user["ID_NUM"])?></p>
+          <p class = "user-info"><strong>First Name:</strong><?= htmlspecialchars($user["FIRST_NAME"])?></p>
+          <p class = "user-info"><strong>Last Name:</strong><?= htmlspecialchars($user["LAST_NAME"])?></p>
+          <p class = "user-info"><strong>Student Number:</strong><?= htmlspecialchars($user["STUD_NUMBER"])?></p>
+          <p class = "user-info"><strong>Email:</strong><?= htmlspecialchars($user["EMAIL"])?></p>
+          <p class = "user-info"><strong>Cell:</strong> <?=htmlspecialchars($user["CELL_NUMBER"])?> </p>
+          <p class = "user-info"><strong>Enrollment Year:</strong><?= htmlspecialchars($user["ENROLLMENT_YEAR"])?></p>
         </section>
         <div><a href ="booking-summary.php">View Your Bookings</a></div>
         <div><a href ="payment-summary.html">View Your Payments</a></div>
-        <a href = "logout.php"><button>Logout</button></a>
+        <div><a href = "logout.php"><button class = "logout-button">Logout</button></a></div>
   </main>
   <footer>
     <p>© 2025 CPUT STAYS. All rights reserved.</p>

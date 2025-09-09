@@ -1,10 +1,11 @@
 /* Reset & basic styling */
-* {
+*{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: "Segoe UI", sans-serif;
 }
+
 body {
   background-color: #f9f9f9;
   color: #333;
@@ -13,9 +14,11 @@ body {
   display: flex;
   flex-direction: column;
 }
+
 main {
 	flex: 1;
 }
+
 header {
   background-color: #0054a6;
   color: white;
@@ -24,27 +27,33 @@ header {
   align-items: center;
   padding: 1em 2em;
 }
+
 header .logo {
   font-size: 1.5em;
   font-weight: bold;
 }
+
 nav a {
   color: white;
   text-decoration: none;
   margin-left: 20px;
 }
+
 nav a:hover {
   text-decoration: underline;
 }
+
 .hero {
   text-align: center;
   padding: 3em 1em;
   background-color: #e6f0ff;
 }
+
 .hero h1 {
   font-size: 2.5em;
   margin-bottom: 0.5em;
 }
+
 .hero .cta-button {
   display: inline-block;
   padding: 0.7em 1.5em;
@@ -54,14 +63,17 @@ nav a:hover {
   text-decoration: none;
   border-radius: 5px;
 }
+
 .featured {
   padding: 2em;
 }
+
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 1.5em;
 }
+
 .card {
   background: white;
   padding: 1em;
@@ -69,12 +81,14 @@ nav a:hover {
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   text-align: center;
 }
+
 .card img {
   max-width: 100%;
   border-radius: 10px;
   height: 150px;
   object-fit: cover;
 }
+
 footer {
   background-color: #0054a6;
   color: white;
@@ -82,6 +96,7 @@ footer {
   padding: 1em 0;
   margin-top: auto /*6.62em;*/
 }
+
 .form-container {
   max-width: 900px;
   margin: 2em auto;
@@ -90,19 +105,23 @@ footer {
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
   border-radius: 10px;
 }
+
 form {
   display: flex;
   flex-direction: column;
 }
+
 form label {
   margin-top: 1em;
 }
+
 form input, form select, form button {
   padding: 0.7em;
   margin-top: 0.3em;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
+
 form button {
   background-color: #0054a6;
   color: white;
@@ -111,4 +130,23 @@ form button {
 }
 form button:hover {
   background-color: #003e80;
+}
+
+
+.logout-button{
+  background-color: #0054a6;
+  color: white;
+  padding: 15px 30px;
+  font-size: 18px;
+  /*margin: 10px 5px 40px 0px;*/
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.user-info{
+
+  margin-bottom:10px;
+  font-size:20px;
+
 }
