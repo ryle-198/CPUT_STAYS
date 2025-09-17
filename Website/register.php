@@ -42,7 +42,7 @@ $password_hash=password_hash($_POST["password"], PASSWORD_DEFAULT);
 
 $mysqli = require __DIR__ . "/database.php";
 
-$sql = "INSERT INTO student (stud_number, first_name, last_name, id_num, email, cell_number, enrollment_year, password_hash, funding)
+$sql = "INSERT INTO student (StudNum, FirstName,LastName, IDNum, Email, CellNumr, EnrollYr, Password, Funding)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 $stmt = $mysqli->stmt_init();
