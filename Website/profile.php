@@ -5,7 +5,7 @@ if (isset($_SESSION["user_id"])) {
     $mysqli = require __DIR__ . "/database.php";
     
     // Fetch student info
-    $sql = "SELECT * FROM student WHERE ID_NUM = ?";
+    $sql = "SELECT * FROM student WHERE IDNum = ?";
     $stmt = $mysqli->prepare($sql);
     $stmt->bind_param("i", $_SESSION["user_id"]);
     $stmt->execute();
@@ -45,16 +45,16 @@ if (isset($_SESSION["user_id"])) {
   </header>
     <main class="form-container">
       <?php if (isset($user)): ?>
-        <h1>Welcome, <?= htmlspecialchars($user["FIRST_NAME"])?></h1>
+        <h1>Welcome, <?= htmlspecialchars($user["FirstName"])?></h1>
         <section>
           <h2>Your Info</h2>
-          <p class = "user-info"><strong>ID NUMBER:</strong><?= htmlspecialchars($user["ID_NUM"])?></p>
-          <p class = "user-info"><strong>First Name:</strong><?= htmlspecialchars($user["FIRST_NAME"])?></p>
-          <p class = "user-info"><strong>Last Name:</strong><?= htmlspecialchars($user["LAST_NAME"])?></p>
-          <p class = "user-info"><strong>Student Number:</strong><?= htmlspecialchars($user["STUD_NUMBER"])?></p>
-          <p class = "user-info"><strong>Email:</strong><?= htmlspecialchars($user["EMAIL"])?></p>
-          <p class = "user-info"><strong>Cell:</strong> <?=htmlspecialchars($user["CELL_NUMBER"])?> </p>
-          <p class = "user-info"><strong>Enrollment Year:</strong><?= htmlspecialchars($user["ENROLLMENT_YEAR"])?></p>
+          <p class = "user-info"><strong>ID NUMBER:</strong><?= htmlspecialchars($user["IDNum"])?></p>
+          <p class = "user-info"><strong>First Name:</strong><?= htmlspecialchars($user["FirstName"])?></p>
+          <p class = "user-info"><strong>Last Name:</strong><?= htmlspecialchars($user["LastName"])?></p>
+          <p class = "user-info"><strong>Student Number:</strong><?= htmlspecialchars($user["StudNum"])?></p>
+          <p class = "user-info"><strong>Email:</strong><?= htmlspecialchars($user["Email"])?></p>
+          <p class = "user-info"><strong>Cell:</strong> <?=htmlspecialchars($user["CellNumr"])?> </p>
+          <p class = "user-info"><strong>Enrollment Year:</strong><?= htmlspecialchars($user["EnrollYr"])?></p>
         </section>
         <div><a href ="booking-summary.php">View Your Bookings</a></div>
         <div><a href ="payment-summary.html">View Your Payments</a></div>

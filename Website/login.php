@@ -20,7 +20,8 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
 
                             session_regenerate_id();
 
-                            $_SESSION["user_id"]= $user["ID_NUM"];
+                            $_SESSION["user_id"]= $user["IDNum"];//Database value is IDNum, for some reason this being different didn't affect logging in
+                                                                //with ID_NUM however it seems to affect profile so change it to database column name
 
                             header("Location: homepage.html");
                             //this needs to be changed to a different location
