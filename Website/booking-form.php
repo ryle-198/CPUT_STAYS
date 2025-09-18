@@ -15,7 +15,7 @@ $stmt->close();
 
 
 
-$sql = "INSERT INTO booking (accommodation, room_type, starting_date, end_date, StudNum)
+$sql = "INSERT INTO booking (name, StartDate, EndDate, StudNum)/*need to get room type*/
         VALUES(?, ?, ?, ?, ?)";
 
 $stmt = $mysqli ->stmt_init();
