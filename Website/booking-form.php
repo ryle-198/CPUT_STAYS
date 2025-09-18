@@ -5,7 +5,7 @@ $mysqli = require __DIR__ . "/database.php";
 
 if($_SERVER["REQUEST_METHOD"]==="POST" && isset($_SESSION["user_id"])){
 
-$sql = "SELECT STUD_NUMBER FROM student WHERE ID_NUM = ?";
+$sql = "SELECT StudNum FROM student WHERE IDNum = ?";
 $stmt = $mysqli->prepare($sql);
 $stmt->bind_param("i", $_SESSION["user_id"]);
 $stmt->execute();

@@ -5,7 +5,7 @@ if (isset($_SESSION["user_id"])) {
     $mysqli = require __DIR__ . "/database.php";
     
     // Fetch student info
-    $sql = "SELECT * FROM student WHERE ID_NUM = ?";
+    $sql = "SELECT * FROM student WHERE IDNum = ?";
     $stmt = $mysqli->prepare($sql);
     $stmt->bind_param("i", $_SESSION["user_id"]);
     $stmt->execute();
