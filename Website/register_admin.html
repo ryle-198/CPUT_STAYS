@@ -18,6 +18,11 @@
     <h2>Admin Registration</h2>
     <form action = "register.php" method="post" id="register-form" novalidate>
       <input type = "hidden" name= "role" value= "admin">
+
+      <div>
+          <label for ="id_num">ID Number</label>
+          <input type="text" id="id_num" name="id_num" required />
+        </div>
       <div>
         <label for ="first_name">First Name</label>
         <input type="text" id="first_name" name="first_name" required />
