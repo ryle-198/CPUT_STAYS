@@ -1,11 +1,11 @@
 <?php
 session_start();
 
-if (isset($_SESSION["user_id"])) {
+if (isset($_SESSION["user_id"]) && $_SESSION["role"] === "student") {
     $mysqli = require __DIR__ . "/database.php";
     
     // Fetch student info
-    $sql = "SELECT * FROM student WHERE IDNum = ?";
+    $sql = "SELECT * FROM student WHERE StudNum = ?";
     $stmt = $mysqli->prepare($sql);
     $stmt->bind_param("i", $_SESSION["user_id"]);
     $stmt->execute();
@@ -17,7 +17,7 @@ if (isset($_SESSION["user_id"])) {
     if ($user) {
         $sql = "SELECT * FROM booking WHERE StudNum = ?";
         $stmt = $mysqli->prepare($sql);
-        $stmt->bind_param("s", $user["STUD_NUMBER"]);
+        $stmt->bind_param("s", $user["StudNum"]);
         $stmt->execute();
         $bookings = $stmt->get_result();
         $stmt->close();
