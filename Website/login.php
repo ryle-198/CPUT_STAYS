@@ -11,7 +11,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
     if($domain === "accoms.ac.za"){
       $table = "admin";
       $id_col = "AdminID";
-      $redirect = "admin.html";
+      $redirect = "add_accommodation.html";
     } else{
 
       $table = "student";

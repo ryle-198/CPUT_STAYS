@@ -53,6 +53,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
         if(empty($_POST["first_name"])) die("First Name is required");
         if(empty($_POST["last_name"])) die("Last Name is required");
         if(! filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) die("Email is required");
+        if(empty($_POST["cell_number"])) die("Cell Number is required");
         if(empty($_POST["id_num"])) die("ID number is required");
         if(strlen($_POST["password"])<8) die("Password must be at least 8 characters long");
 
