@@ -17,7 +17,7 @@ if (isset($_SESSION["user_id"])) {
     if ($user) {
         $sql = "SELECT * FROM booking WHERE StudNum = ?";
         $stmt = $mysqli->prepare($sql);
-        $stmt->bind_param("s", $user["STUD_NUMBER"]);
+        $stmt->bind_param("s", $user["StudNum"]);
         $stmt->execute();
         $bookings = $stmt->get_result();
         $stmt->close();
@@ -70,11 +70,11 @@ if (isset($_SESSION["user_id"])) {
               <h3>Booking Period</h3>
               <div class="summary-item">
                 <span class="label">Check-in Date:</span>
-                <span class="value"><?= htmlspecialchars($b["STARTING_DATE"]) ?></span>
+                <span class="value"><?= htmlspecialchars($b["StartDate"]) ?></span>
               </div>
               <div class="summary-item">
                 <span class="label">Check-out Date:</span>
-                <span class="value"><?= htmlspecialchars($b["END_DATE"]) ?></span>
+                <span class="value"><?= htmlspecialchars($b["EndDate"]) ?></span>
               </div>
             </div>
 

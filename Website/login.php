@@ -3,8 +3,39 @@ $is_invalid=false;
 if($_SERVER["REQUEST_METHOD"] === "POST"){
 
     $mysqli = require __DIR__ . "/database.php";
+    $email = $_POST["email"];
+    $password = $_POST["password"];
 
-    $sql = sprintf("SELECT * FROM student
+    $domain = substr(strrchr($email, "@"), 1);
+
+    if($domain === "accoms.ac.za"){
+      $table = "admin";
+      $id_col = "AdminID";
+      $redirect = "admin-panel.php";
+    } else{
+
+      $table = "student";
+      $id_col = "StudNum";
+      $redirect = "homepage.html";
+    }
+
+    $sql = sprintf("SELECT * FROM $table WHERE Email ='%s'",
+                  $mysqli->real_escape_string($email));
+    $result = $mysqli->query($sql);
+    $user = $result->fetch_assoc();
+
+    if($user && password_verify($password, $user["Password"])){
+      session_start();
+      session_regenerate_id();
+      $_SESSION["user_id"] = $user[$id_col];
+      $_SESSION["role"] = $table;
+      header("Location: $redirect");
+      exit;
+
+    }
+
+    $is_invalid = true;
+    /*$sql = sprintf("SELECT * FROM student
                     WHERE email ='%s'",
                     $mysqli->real_escape_string($_POST["email"]));
 
@@ -31,10 +62,9 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
 
                     }
                     $is_invalid=true;
-
-}
-
-?>
+                    */
+  }
+  ?>
 
 <!DOCTYPE html>
 <html lang="en">
