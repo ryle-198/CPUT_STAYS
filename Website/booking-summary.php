@@ -1,27 +1,23 @@
 <?php
 session_start();
 
-if (isset($_SESSION["user_id"])) {
+if (isset($_SESSION["user_id"]) && $_SESSION["role"] === "student") {
     $mysqli = require __DIR__ . "/database.php";
-    
-    // Fetch student info
-    $sql = "SELECT * FROM student WHERE IDNum = ?";
+
+    $sql = "SELECT b.BookingID, b.RmNum, b.StartDate, b.EndDate, b.TotCost, 
+               b.PaymentStatus, b.BkStatus,
+               a.Name AS AccommodationName,
+               r.RmType
+        FROM booking b
+        JOIN accommodation a ON b.AccommodationID = a.AccommodationID
+        JOIN rooms r ON b.RmNum = r.RmNum
+        WHERE b.StudNum = ?
+        ORDER BY b.BookingDate DESC";
     $stmt = $mysqli->prepare($sql);
     $stmt->bind_param("i", $_SESSION["user_id"]);
     $stmt->execute();
-    $result = $stmt->get_result();
-    $user = $result->fetch_assoc();
+    $bookings = $stmt->get_result();
     $stmt->close();
-
-    // Fetch bookings for this student
-    if ($user) {
-        $sql = "SELECT * FROM booking WHERE StudNum = ?";
-        $stmt = $mysqli->prepare($sql);
-        $stmt->bind_param("s", $user["StudNum"]);
-        $stmt->execute();
-        $bookings = $stmt->get_result();
-        $stmt->close();
-    }
 }
 ?>
 <!DOCTYPE html>
@@ -29,62 +25,97 @@ if (isset($_SESSION["user_id"])) {
 <head>
   <meta charset="UTF-8" />
   <title>Booking Summary</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+    th {
+      background: #f4f4f4;
+      text-align: left;
+    }
+    button.cancel-btn {
+      background: red;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
   <header>
     <div class="logo">
-	<a href="homepage.html" style="text-decoration: none; color: white;">
-	<img src="logo.jpg" alt="cput logo" style="height: 40px; margin-right: 10px; vertical-align: middle;">
-	CPUT STAYS
-	</a>
-	</div>
+      <a href="homepage.php" style="text-decoration: none; color: white;">
+        <img src="logo.jpg" alt="cput logo" style="height: 40px; margin-right: 10px; vertical-align: middle;">
+        CPUT STAYS
+      </a>
+    </div>
     <nav>
-      <a href="profile.php">Profile</a>
     </nav>
   </header>
+
   <main class="form-container">
-    
-<h2>Booking Summary</h2>
-<?php if ($bookings && $bookings->num_rows > 0): ?>
-    <?php while ($b = $bookings->fetch_assoc()): ?>
-        <div class="booking-card">
+    <h1>Your Bookings</h1>
+    <div style="margin: 15px 0;">
+  <a href="profile.php" style="
+      color: #0073e6;
+      text-decoration: none;
+  ">Back to Profile</a>
+</div>
 
-            <div class="summary-section">
-              <h3>Accommodation Details</h3>
-              <div class="summary-item">
-                <span class="label">Accommodation:</span>
-                <span class="value"><?= htmlspecialchars($b["ACCOMMODATION"]) ?></span>
-              </div>
-              <div class="summary-item">
-                <span class="label">Room Type:</span>
-                <span class="value"><?= htmlspecialchars($b["ROOM_TYPE"]) ?></span>
-              </div>
-              <div class="summary-item">
-                <span class="label">Location:</span>
-                <span class="value">Cape Town CBD</span>
-              </div>
-            </div>
-
-            <div class="summary-section">
-              <h3>Booking Period</h3>
-              <div class="summary-item">
-                <span class="label">Check-in Date:</span>
-                <span class="value"><?= htmlspecialchars($b["StartDate"]) ?></span>
-              </div>
-              <div class="summary-item">
-                <span class="label">Check-out Date:</span>
-                <span class="value"><?= htmlspecialchars($b["EndDate"]) ?></span>
-              </div>
-            </div>
-
-        </div> <!-- end .booking-card -->
-    <?php endwhile; ?>
-<?php else: ?>
-    <p>No bookings found.</p>
-<?php endif; ?>
-
+    <?php if ($bookings && $bookings->num_rows > 0): ?>
+      <table>
+        <thead>
+          <tr>
+            <th>Accommodation</th>
+            <th>Room Type</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Total Cost</th>
+            <th>Status</th>
+            <th>Payment</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php while ($b = $bookings->fetch_assoc()): ?>
+            <?php $startDate = strtotime($b["StartDate"]); ?>
+            <tr>
+              <td><?= htmlspecialchars($b["AccommodationName"]) ?></td>
+              <td><?= htmlspecialchars($b["RmType"]) ?></td>
+              <td><?= htmlspecialchars($b["StartDate"]) ?></td>
+              <td><?= htmlspecialchars($b["EndDate"]) ?></td>
+              <td>R<?= number_format($b["TotCost"], 2) ?></td>
+              <td><?= htmlspecialchars($b["BkStatus"]) ?></td>
+              <td><?= htmlspecialchars($b["PaymentStatus"]) ?></td>
+              <td>
+                <?php if (($b["BkStatus"] === "Pending" || $b["BkStatus"] === "Confirmed") && $startDate > time()): ?>
+                  <form method="post" action="cancel-booking.php" onsubmit="return confirm('Are you sure you want to cancel this booking?');">
+                    <input type="hidden" name="booking_id" value="<?= $b['BookingID'] ?>">
+                    <input type="hidden" name="room_id" value="<?= $b['RmNum'] ?>">
+                    <button type="submit" class="cancel-btn">Cancel</button>
+                  </form>
+                <?php else: ?>
+                  -
+                <?php endif; ?>
+              </td>
+            </tr>
+          <?php endwhile; ?>
+        </tbody>
+      </table>
+    <?php else: ?>
+      <p>No bookings yet.</p>
+    <?php endif; ?>
   </main>
+
   <footer>
     <p>© 2025 CPUT STAYS. All rights reserved.</p>
   </footer>
