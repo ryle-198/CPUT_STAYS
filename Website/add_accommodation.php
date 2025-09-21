@@ -30,9 +30,32 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         die("Error inserting accommodation: " . $stmt->error);
     }
 
-    echo "Accommodation added and linked to your account successfully!";
-    // Optionally redirect:
-    // header("Location: dashboard.php");
-    // exit;
+    $accommodation_id = $stmt->insert_id;
+    $stmt->close();
+
+    $rm_types = $_POST['rm_types'];
+    $tot_rms = $_POST['tot_rms'];
+    $prices = $_POST['price'];
+
+    $sql2 = "INSERT INTO rooms (AccommodationID, RmType, TotRms, AvailableRms, PricePerRmType)
+             VALUES (?, ?, ?, ?, ?)";
+    $stmt2 = $mysqli->prepare($sql2);
+    
+    foreach ($rm_types as $index => $type) {
+        $type = $rm_types[$index];
+        $total = (int)$tot_rms[$index];
+        $available = $total;
+        $price = (float)$prices[$index];
+
+        $stmt2->bind_param("isiii", $accommodation_id, $type, $total, $available, $price);
+        if (!$stmt2->execute()) {
+            die("Error inserting room: " . $stmt2->error);
+        }
+    }
+    $stmt2->close();
+
+    echo "Accommodation and rooms added successfully!";
+    header("Location: admin-panel.php");
+    exit;
 }
 ?>
