@@ -9,6 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_SESSION["user_id"])) {
     $start = $_POST["starting_date"];
     $end = $_POST["end_date"];
     $today = date("Y-m-d");
+    $total_cost = $_POST["total_cost"];
 
     // Fetch room price
     $sql = "SELECT PricePerRmType FROM rooms WHERE RmNum = ?";

@@ -16,7 +16,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
 
       $table = "student";
       $id_col = "StudNum";
-      $redirect = "homepage.html";
+      $redirect = "homepage.php";
     }
 
     $sql = sprintf("SELECT * FROM $table WHERE Email ='%s'",

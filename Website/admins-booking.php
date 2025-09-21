@@ -10,8 +10,7 @@ if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
 $admin_id = $_SESSION["user_id"];
 
 // Fetch all bookings for accommodations owned by this admin
-$sql = "
-    SELECT b.BookingID, b.StartDate, b.EndDate, b.BookingDate, b.TotCost, 
+$sql = "SELECT b.BookingID, b.StartDate, b.EndDate, b.BookingDate, b.TotCost, 
            b.BkStatus, b.PaymentStatus,
            s.FirstName, s.LastName, s.StudNum, s.Email,
            a.Name AS AccommodationName,
@@ -62,7 +61,7 @@ $stmt->close();
   <header>
     <div class="logo">CPUT STAYS</div>
     <nav>
-      <a href="admin-panel.php">Dashboard</a>
+      <a href="admins-profile.php">Profile</a>
       <a href="admin-occupants.php">Occupants</a>
       <a href="logout.php">Logout</a>
     </nav>
@@ -70,7 +69,7 @@ $stmt->close();
 
   <main class="form-container">
     <h1>Manage Bookings</h1>
-
+    <a href = "admin-panel.php">Back to Dashboard</a>
     <?php if ($bookings->num_rows > 0): ?>
       <table>
         <thead>
