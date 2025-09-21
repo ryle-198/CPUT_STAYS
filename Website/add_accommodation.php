@@ -8,19 +8,19 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
 }
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // Validation
+    // Basic validation
     if (empty($_POST['name'])) die("Accommodation name is required");
     if (empty($_POST['address'])) die("Address is required");
     if (empty($_POST['contact_num'])) die("Contact number is required");
     if (empty($_POST['amenities'])) die("Amenities are required");
 
-    // Gather data
+    // Accommodation data
     $name = $_POST['name'];
     $address = $_POST['address'];
     $contact_num = $_POST['contact_num'];
     $amenities = $_POST['amenities'];
 
-    // Insert accommodation and link it directly to this admin
+    // Insert accommodation
     $sql = "INSERT INTO accommodation (AdminID, Name, Address, ContactNum, Amenities)
             VALUES (?, ?, ?, ?, ?)";
     $stmt = $mysqli->prepare($sql);
@@ -30,17 +30,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         die("Error inserting accommodation: " . $stmt->error);
     }
 
+    // Get accommodation ID
     $accommodation_id = $stmt->insert_id;
     $stmt->close();
 
-    $rm_types = $_POST['rm_types'];
+    // Rooms data (arrays)
+    $rm_types = $_POST['rm_type'];
     $tot_rms = $_POST['tot_rms'];
     $prices = $_POST['price'];
 
     $sql2 = "INSERT INTO rooms (AccommodationID, RmType, TotRms, AvailableRms, PricePerRmType)
              VALUES (?, ?, ?, ?, ?)";
     $stmt2 = $mysqli->prepare($sql2);
-    
+
     foreach ($rm_types as $index => $type) {
         $type = $rm_types[$index];
         $total = (int)$tot_rms[$index];

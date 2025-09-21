@@ -1,48 +1,54 @@
 <?php
 session_start();
-
 $mysqli = require __DIR__ . "/database.php";
 
-if($_SERVER["REQUEST_METHOD"]==="POST" && isset($_SESSION["user_id"])){
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_SESSION["user_id"])) {
+    $studnum = $_SESSION["user_id"]; // student PK
+    $accommodation_id = (int)$_POST["accommodation_id"];
+    $room_id = (int)$_POST["room_id"];
+    $start = $_POST["starting_date"];
+    $end = $_POST["end_date"];
+    $today = date("Y-m-d");
+    $total_cost = $_POST["total_cost"];
 
-$sql = "SELECT StudNum FROM student WHERE IDNum = ?";
-$stmt = $mysqli->prepare($sql);
-$stmt->bind_param("i", $_SESSION["user_id"]);
-$stmt->execute();
-$stmt->bind_result($stud_number);
-$stmt->fetch();
-$stmt->close();
+    // Fetch room price
+    $sql = "SELECT PricePerRmType FROM rooms WHERE RmNum = ?";
+    $stmt = $mysqli->prepare($sql);
+    $stmt->bind_param("i", $room_id);
+    $stmt->execute();
+    $stmt->bind_result($price);
+    $stmt->fetch();
+    $stmt->close();
 
+    if (!$price) {
+        die("Invalid room selection.");
+    }
 
+    // Calculate total cost (days * price)
+    /*$days = (strtotime($end) - strtotime($start)) / (60 * 60 * 24);
+    if ($days <= 0) {
+        die("End date must be after start date.");
+    }
+    $total_cost = $days * $price;*/
 
-$sql = "INSERT INTO booking (name, StartDate, EndDate, StudNum)/*need to get room type*/
-        VALUES(?, ?, ?, ?, ?)";
+    // Insert booking
+    $sql = "INSERT INTO booking 
+            (AccommodationID, StudNum, RmNum, BookingDate, StartDate, EndDate, PaymentStatus, TotCost, BkStatus) 
+            VALUES (?, ?, ?, ?, ?, ?, 'Pending', ?, 'Pending')";
+    $stmt = $mysqli->prepare($sql);
+    $stmt->bind_param("iiisssd", $accommodation_id, $studnum, $room_id, $today, $start, $end, $total_cost);
 
-$stmt = $mysqli ->stmt_init();
+    if ($stmt->execute()) {
+        // Decrease available rooms
+        $sql2 = "UPDATE rooms SET AvailableRms = AvailableRms - 1 WHERE RmNum = ?";
+        $stmt2 = $mysqli->prepare($sql2);
+        $stmt2->bind_param("i", $room_id);
+        $stmt2->execute();
 
-if(! $stmt -> prepare($sql)){
-    die("SQL error: " . $mysqli->error);
-}
-
-$stmt->bind_param("sssss",
-                $_POST["accommodation"],
-                $_POST["room_type"],
-                $_POST["starting_date"],
-                $_POST["end_date"],
-                $stud_number);
-
-if($stmt->execute()){
-    header("Location: profile.php");
-    exit;
-
-}else{
-
-    error_log("Database insert failed: " . $stmt->error);
-
-    echo "Sorry, we couldn't process your booking right now. Please try again later.";
-   
-
-
+        header("Location: profile.php");
+        exit;
+    } else {
+        die("Error creating booking: " . $stmt->error);
     }
 }
 ?>
