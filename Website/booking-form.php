@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_SESSION["user_id"])) {
     $start = $_POST["starting_date"];
     $end = $_POST["end_date"];
     $today = date("Y-m-d");
-    $total_cost = $_POST["total_cost"];
+    //$total_cost = $_POST["total_cost"];
 
     // Fetch room price
     $sql = "SELECT PricePerRmType FROM rooms WHERE RmNum = ?";
@@ -25,11 +25,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_SESSION["user_id"])) {
     }
 
     // Calculate total cost (days * price)
-    /*$days = (strtotime($end) - strtotime($start)) / (60 * 60 * 24);
+    $days = (strtotime($end) - strtotime($start)) / (60 * 60 * 24);
     if ($days <= 0) {
         die("End date must be after start date.");
     }
-    $total_cost = $days * $price;*/
+    $total_cost = $days * $price;
 
     // Insert booking
     $sql = "INSERT INTO booking 
